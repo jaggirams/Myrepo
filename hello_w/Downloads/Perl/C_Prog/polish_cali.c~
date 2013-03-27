@@ -1,0 +1,93 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+void push(char [],char,int , int *);
+
+void getlinec(char [], int);
+//void push(char [],char,int , int* );
+char pop(char [],int ,int* );
+
+
+void main(){
+
+	char expression[100],result[100],value;	
+	int i=0, *j, count=0 ;
+	(*j)=0;
+
+	count= sizeof(expression);
+	bzero(expression,count);
+	//printf("\n the size of char is %d\n",sizeof(char));
+	printf("\n Enter the Expression: \n");
+	getlinec(expression,count);
+	puts(expression);
+
+
+	for(i=0;expression[i]!='\0';i++){
+		if((expression[i]>='0') && (expression[i]<='9'))
+			push(result,expression[i],count,&j);
+
+		else{
+			swtich(expression[i]){
+						case '+':value= pop(result,count,&j)+pop(reusult,count,&j);
+								push(result,value,count,&j);
+								break;
+						
+						case '-':value=pop(result,count,&j)-pop(reusult,count,&j);
+								push(result,value,count,&j);
+								break;
+
+						case '*':value=pop(result,count,&j) * pop(reusult,count,&j);
+								push(result,value,count,&j);
+								break;
+
+						case '/': value=pop(result,count,&j)/pop(reusult,count,&j);
+								push(result,value,count,&j);
+								break;
+			
+						default: printf("\n Invalid Operation\n");
+								break;
+
+			}
+
+	    }
+
+      }
+
+
+}
+
+
+/**************************************************** Functions used*******************************************/
+
+
+void getlinec(char expression[], int c){
+	int i=0,j=0;
+	/*c=(sizeof(expression)); 			/*Can't use this as it returns the size of the
+		 		   			pointer to the 1st element of the array*/
+	//printf("\n %d is the size of c \n",c); 
+	for(i=0;((i<c) && ((expression[i]=getchar()) !=EOF));i++){
+		
+	}
+	expression[i]='\0';
+}
+
+
+
+void push(char result[],char value,int count, int *j){
+		if(*j<count)
+			result[*j++]=value;
+		else
+			print("\n Invalid Address \n");
+}
+
+char pop(char result[],int count,int *j){
+	int value=0;
+	if((*j)<count){
+			value=result[((*j)++)];
+			return(value);
+	}
+	else{
+			print("\n Invalid Address \n");
+			return('0');
+		}
+}
